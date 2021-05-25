@@ -1,0 +1,43 @@
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+    // complemento de gradle para generar el uberjar
+//   id 'com.github.johnrengelman.shadow' version '6.0.0'
+    //hace que las clases sean mas cortas generar geter and seter
+    id 'io.freefair.lombok' version '5.1.0'
+    id 'application'
+}
+repositories {
+    
+    jcenter()
+}
+
+ext{
+	helidonVersion = '2.0.1'
+}
+
+dependencies {
+	implementation platform("io.helidon:helidon-dependencies:${helidonVersion}")
+	compile group: 'io.helidon.microprofile.server', name: 'helidon-microprofile-server', version: '2.0.2'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.29.1'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-binding', version: '2.31'
+	
+	//CDI
+	compile group: 'org.jboss.weld.se', name: 'weld-se-core', version:'3.1.4.Final'
+	compile group: 'org.jboss.weld.servlet', name: 'weld-servlet-core', version: '3.1.2.Final'
+	compile group: 'org.jboss.weld.servlet', name: 'weld-servlet-shaded', version:'3.1.4.Final'
+
+	//JDBC
+	    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+		
+	//DB
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+	//compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+	//Registo
+	compile group: 'org.apache.curator', name: 'curator-x-discovery', version: '5.1.0'
+
+}
+application{
+
+   mainClassName = 'com.programacion.Principal.Run'
+}
